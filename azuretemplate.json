@@ -79,7 +79,7 @@
       "functionAppName": "[parameters('appName')]",
       "hostingPlanName": "[parameters('appName')]",
       "applicationInsightsName": "[parameters('appName')]",
-      "storageAccountName": "[concat('Questionnairee',uniquestring(resourceGroup().id))]",
+      "storageAccountName": "[concat('questionnaire',uniquestring(resourceGroup().id))]",
       "functionWorkerRuntime": "[parameters('runtime')]"
     },
     "resources": [
