@@ -3,19 +3,25 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appName": {
-            "value": "QuesDemoAppARM" 
+            "value": "Demo-Questionnaire-App" 
         },
         "storageAccountType": {
             "value": "Standard_LRS"
         },
         "location": {
-            "value": "eastus" 
+            "value": "centralus" 
         },
         "appInsightsLocation": {
-            "value": "eastus" 
+            "value": "centralus" 
         },
         "runtime": {
             "value": "node"
+        },
+        "serviceBusNamespaceName": {
+            "value": "Demo-Questionnaire-Service-Bus"
+        },
+        "serviceBusSku": {
+            "value": "Standard"
         }
     }
 }
