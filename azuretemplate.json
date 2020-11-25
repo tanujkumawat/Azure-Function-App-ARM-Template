@@ -42,15 +42,38 @@
           "description": "The language worker runtime to load in the function app."
         }
       }
+      // "rgName": {
+      //   "type": "string",
+      //   "metadata": {
+      //     "description": "Enter the name of Resource Group"
+      //   }
+      // },
+      // "rgLocation": {
+      //   "type": "string",
+      //   "metadata": {
+      //     "description": "Enter the Location of Resource"
+      //   }
+      // }
     },
     "variables": {
+      // "rgname": "[parameters('rgName')]",
       "functionAppName": "[parameters('appName')]",
       "hostingPlanName": "[parameters('appName')]",
       "applicationInsightsName": "[parameters('appName')]",
-      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunc')]",
+      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'funcApp')]",
       "functionWorkerRuntime": "[parameters('runtime')]"
     },
     "resources": [
+      // {
+      //   "name": "[variables('rgname')]",
+      //   "type": "Microsoft.Resources/resourceGroups",
+      //   "apiVersion": "2019-10-01",
+      //   "location": "[parameters('rgLocation')]",
+      //   "dependsOn": [
+      //   ],
+      //   "tags": {
+      //   }
+      // },
       {
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",

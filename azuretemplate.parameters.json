@@ -9,10 +9,10 @@
             "value": "Standard_LRS"
         },
         "location": {
-            "value": "centralus" 
+            "value": "eastus" 
         },
         "appInsightsLocation": {
-            "value": "centralus" 
+            "value": "eastus" 
         },
         "runtime": {
             "value": "node"
