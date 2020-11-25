@@ -60,22 +60,15 @@
         "metadata": {
           "description": "The messaging tier for service Bus namespace"
         }
+      },
+      "serviceBusQueueName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the Queue"
+        }
       }
-      // "rgName": {
-      //   "type": "string",
-      //   "metadata": {
-      //     "description": "Enter the name of Resource Group"
-      //   }
-      // },
-      // "rgLocation": {
-      //   "type": "string",
-      //   "metadata": {
-      //     "description": "Enter the Location of Resource"
-      //   }
-      // }
     },
     "variables": {
-      // "rgname": "[parameters('rgName')]",
       "functionAppName": "[parameters('appName')]",
       "hostingPlanName": "[parameters('appName')]",
       "applicationInsightsName": "[parameters('appName')]",
@@ -83,17 +76,6 @@
       "functionWorkerRuntime": "[parameters('runtime')]"
     },
     "resources": [
-      // {
-      //   "name": "[variables('rgname')]",
-      //   "type": "Microsoft.Resources/resourceGroups",
-      //   "apiVersion": "2019-10-01",
-      //   "location": "[parameters('rgLocation')]",
-      //   "dependsOn": [
-      //   ],
-      //   "tags": {
-      //   }
-      // },
-
       {
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
@@ -186,7 +168,30 @@
       "sku": {
         "name": "[parameters('serviceBusSku')]"
       },
-      "properties": {}
+      "properties": {},
+      "resources": [
+        {
+          "type": "Queues",
+          "apiVersion": "2017-04-01",
+          "name": "[parameters('serviceBusQueueName')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusNamespaceName'))]"
+          ],
+          "properties": {
+            "lockDuration": "PT5M",
+            "maxSizeInMegabytes": 1024,
+            "requiresDuplicateDetection": false,
+            "requiresSession": false,
+            "defaultMessageTimeToLive": "P10675199DT2H48M5.4775807S",
+            "deadLetteringOnMessageExpiration": false,
+            "duplicateDetectionHistoryTimeWindow": "PT10M",
+            "maxDeliveryCount": 10,
+            "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
+            "enablePartitioning": false,
+            "enableExpress": false
+          }
+        }
+      ]
       }
     ]
   }
