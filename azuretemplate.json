@@ -60,7 +60,7 @@
       "functionAppName": "[parameters('appName')]",
       "hostingPlanName": "[parameters('appName')]",
       "applicationInsightsName": "[parameters('appName')]",
-      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'funcApp')]",
+      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunction')]",
       "functionWorkerRuntime": "[parameters('runtime')]"
     },
     "resources": [
