@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appName": {
-            "value": "Demo-Questionnaire-App-1" 
+            "value": "Demo-Questionnaire-FuncApp" 
         },
         "storageAccountType": {
             "value": "Standard_LRS"
