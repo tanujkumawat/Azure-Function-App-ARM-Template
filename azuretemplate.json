@@ -47,7 +47,7 @@
       "functionAppName": "[parameters('appName')]",
       "hostingPlanName": "[parameters('appName')]",
       "applicationInsightsName": "[parameters('appName')]",
-      "storageAccountName": "[parameters('appName')]",
+      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunc')]",
       "functionWorkerRuntime": "[parameters('runtime')]"
     },
     "resources": [
