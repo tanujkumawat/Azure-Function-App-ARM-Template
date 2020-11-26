@@ -69,11 +69,11 @@
       }
     },
     "variables": {
-      "functionAppName": "[concat('quesnia',parameters('appName'))]",
-      "hostingPlanName": "[concat('quesnia',parameters('appName'))]",
-      "applicationInsightsName": "[concat('quesnia',parameters('appName'))]",
-      "storageAccountName": "[concat('quesnia',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[concat('quesnia',parameters('runtime'))]"
+      "functionAppName": "[concat('tanujk',parameters('appName'))]",
+      "hostingPlanName": "[concat('tanujk',parameters('appName'))]",
+      "applicationInsightsName": "[concat('tanujk',parameters('appName'))]",
+      "storageAccountName": "[concat('tanujk',uniquestring(resourceGroup().id))]",
+      "functionWorkerRuntime": "[concat('tanujk',parameters('runtime'))]"
     },
     "resources": [
       {
@@ -171,7 +171,7 @@
       "properties": {},
       "resources": [
         {
-          "condition": "[not(equals(parameters('serviceBusNamespaceName'),'servicesvbus'))]",
+          // "condition": "[not(equals(parameters('serviceBusNamespaceName'),'servicesvbus'))]",
           "type": "Queues",
           "apiVersion": "2017-04-01",
           "name": "[parameters('serviceBusQueueName')]",
