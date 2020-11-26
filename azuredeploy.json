@@ -171,6 +171,7 @@
       "properties": {},
       "resources": [
         {
+          "condition": "[not(equals(parameters('serviceBusNamespaceName'),'new'))]",
           "type": "Queues",
           "apiVersion": "2017-04-01",
           "name": "[parameters('serviceBusQueueName')]",
