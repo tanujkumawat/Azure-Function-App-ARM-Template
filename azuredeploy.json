@@ -45,9 +45,9 @@
       },
       "serviceBusNamespaceName": {
       "type": "string",
-      "metadata": {
-        "description": "Name of the Service Bus namespace"
-      }
+        "metadata": {
+          "description": "Name of the Service Bus namespace"
+        }
       },
       "serviceBusSku": {
         "type": "string",
@@ -69,11 +69,11 @@
       }
     },
     "variables": {
-      "functionAppName": "[parameters('appName')]",
-      "hostingPlanName": "[parameters('appName')]",
-      "applicationInsightsName": "[parameters('appName')]",
-      "storageAccountName": "[concat('questi',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[parameters('runtime')]"
+      "functionAppName": "[concat('quesniare',parameters('appName'))]",
+      "hostingPlanName": "[concat('quesniare',parameters('appName'))]",
+      "applicationInsightsName": "[concat('quesniare',parameters('appName'))]",
+      "storageAccountName": "[concat('quesniare',uniquestring(resourceGroup().id))]",
+      "functionWorkerRuntime": "[concat('quesniare',parameters('runtime'))]"
     },
     "resources": [
       {

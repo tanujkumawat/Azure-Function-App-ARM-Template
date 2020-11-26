@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appName": {
-            "value": "Demo-Questionnaire-FuncApp-2" 
+            "value": "funcApp" 
         },
         "storageAccountType": {
             "value": "Standard_LRS"
@@ -18,7 +18,7 @@
             "value": "node"
         },
         "serviceBusNamespaceName": {
-            "value": "Demo-Questionnaire-Service-Bus-2"
+            "value": null
         },
         "serviceBusSku": {
             "value": "Standard"
