@@ -69,11 +69,11 @@
       }
     },
     "variables": {
-      "functionAppName": "[concat('quesniar',parameters('appName'))]",
-      "hostingPlanName": "[concat('quesniar',parameters('appName'))]",
-      "applicationInsightsName": "[concat('quesniar',parameters('appName'))]",
-      "storageAccountName": "[concat('quesniar',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[concat('quesniar',parameters('runtime'))]"
+      "functionAppName": "[concat('quesnia',parameters('appName'))]",
+      "hostingPlanName": "[concat('quesnia',parameters('appName'))]",
+      "applicationInsightsName": "[concat('quesnia',parameters('appName'))]",
+      "storageAccountName": "[concat('quesnia',uniquestring(resourceGroup().id))]",
+      "functionWorkerRuntime": "[concat('quesnia',parameters('runtime'))]"
     },
     "resources": [
       {
