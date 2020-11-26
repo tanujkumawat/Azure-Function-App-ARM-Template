@@ -18,7 +18,7 @@
             "value": "node"
         },
         "serviceBusNamespaceName": {
-            "value": null
+            "value": "SBdemo"
         },
         "serviceBusSku": {
             "value": "Standard"
