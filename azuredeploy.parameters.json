@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appName": {
-            "value": "funcApp" 
+            "value": "funcApps" 
         },
         "storageAccountType": {
             "value": "Standard_LRS"
