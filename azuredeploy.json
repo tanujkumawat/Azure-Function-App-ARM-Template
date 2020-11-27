@@ -32,16 +32,26 @@
           "description": "Location for Application Insights"
         }
       },
-      "runtime": {
+      "linuxFxVersion": {
         "type": "string",
-        "allowedValues": [
-          "node",
-          "dotnet",
-          "java"
-        ],
         "metadata": {
           "description": "The language worker runtime to load in the function app."
         }
+      },
+      "sku": {
+        "type": "string",
+        "metadata": {
+          "description": "ASP sku name"
+        }
+      },
+      "skuCode": {
+        "type": "string",
+        "metadata": {
+          "description": "ASP sku Code"
+        }
+      },
+      "use32BitWorkerProcess": {
+            "type": "bool"
       },
       "serviceBusNamespaceName": {
       "type": "string",
@@ -51,11 +61,6 @@
       },
       "serviceBusSku": {
         "type": "string",
-        "allowedValues": [
-          "Basic",
-          "Standard",
-          "Premium"
-        ],
         "defaultValue": "Standard",
         "metadata": {
           "description": "The messaging tier for service Bus namespace"
@@ -73,11 +78,11 @@
       "hostingPlanName": "[concat('tanujk',parameters('appName'))]",
       "applicationInsightsName": "[concat('tanujk',parameters('appName'))]",
       "storageAccountName": "[concat('tanujk',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[concat('tanujk',parameters('runtime'))]"
+      "functionWorkerRuntime": "[concat('tanujk',parameters('linuxFxVersion'))]"
     },
     "resources": [
       {
-        "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
+        // "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "name": "[variables('storageAccountName')]",
@@ -85,36 +90,41 @@
         "sku": {
           "name": "[parameters('storageAccountType')]"
         },
-        "kind": "Storage"
+        "kind": "Storage",
+        "properties": {
+          "supportsHttpsTrafficOnly": true
+        }
       },
       {
-        "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2018-02-01",
         "name": "[variables('hostingPlanName')]",
         "location": "[parameters('location')]",
+        "kind": "linux",
         "sku": {
-          "name": "Y1",
-          "tier": "Dynamic"
+          "name": "[parameters('skuCode')]",
+          "tier": "[parameters('sku')]"
         },
         "properties": {
           "name": "[variables('hostingPlanName')]",
-          "computeMode": "Dynamic"
+          "reserved": true
         }
       },
       {
-        "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/sites",
         "apiVersion": "2018-11-01",
         "name": "[variables('functionAppName')]",
         "location": "[parameters('location')]",
-        "kind": "functionapp",
+        "kind": "functionapp,linux",
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
           "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
         ],
         "properties": {
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+          "clientAffinityEnabled": false,
           "siteConfig": {
             "appSettings": [
               {
@@ -134,10 +144,6 @@
                 "value": "~2"
               },
               {
-                "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                "value": "~10"
-              },
-              {
                 "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                 "value": "[reference(resourceId('microsoft.insights/components', variables('applicationInsightsName')), '2020-02-02-preview').InstrumentationKey]"
               },
@@ -145,19 +151,19 @@
                 "name": "FUNCTIONS_WORKER_RUNTIME",
                 "value": "[variables('functionWorkerRuntime')]"
               }
-            ]
+            ],
+            "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+            "linuxFxVersion": "[parameters('linuxFxVersion')]",
+            "alwaysOn": true
           }
         }
       },
       {
-        "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
         "type": "microsoft.insights/components",
         "apiVersion": "2018-05-01-preview",
         "name": "[variables('applicationInsightsName')]",
         "location": "[parameters('appInsightsLocation')]",
-        "tags": {
-          "[concat('hidden-link:', resourceId('Microsoft.Web/sites', variables('applicationInsightsName')))]": "Resource"
-        },
         "properties": {
           "Application_Type": "web",
           "ApplicationId": "[variables('applicationInsightsName')]",
@@ -175,7 +181,6 @@
       "properties": {},
       "resources": [
         {
-          // "condition": "[not(equals(parameters('serviceBusNamespaceName'),'servicesvbus'))]",
           "type": "Queues",
           "apiVersion": "2017-04-01",
           "name": "[parameters('serviceBusQueueName')]",

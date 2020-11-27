@@ -9,13 +9,13 @@
             "value": "Standard_LRS"
         },
         "location": {
-            "value": "centralus" 
+            "value": "uksouth" 
         },
         "appInsightsLocation": {
-            "value": "centralus" 
+            "value": "uksouth" 
         },
-        "runtime": {
-            "value": "node"
+        "linuxFxVersion": {
+            "value": "Node|10"
         },
         "serviceBusNamespaceName": {
             "value": "servicesvbus"
@@ -25,6 +25,15 @@
         },
         "serviceBusQueueName": {
             "value": "questionnaire" 
+        },
+        "sku": {
+            "value": "Basic"
+        },
+        "skuCode": {
+            "value": "B2" 
+        },
+        "use32BitWorkerProcess": {
+            "value": false 
         }
     }
 }
