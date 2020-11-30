@@ -68,11 +68,11 @@
       }
     },
     "variables": {
-      "functionAppName": "[concat('tanujk',parameters('appName'))]",
-      "hostingPlanName": "[concat('tanujk',parameters('appName'))]",
-      "applicationInsightsName": "[concat('tanujk',parameters('appName'))]",
-      "storageAccountName": "[concat('tanujk',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[concat('tanujk',parameters('linuxFxVersion'))]",
+      "functionAppName": "[concat(parameters('appName'),uniquestring(resourceGroup().id))]",
+      "hostingPlanName": "[concat(parameters('appName'),uniquestring(resourceGroup().id))]",
+      "applicationInsightsName": "[concat(parameters('appName'),uniquestring(resourceGroup().id))]",
+      "storageAccountName": "[concat(parameters('appName'),uniquestring(resourceGroup().id))]",
+      "functionWorkerRuntime": "[concat(parameters('appName'),uniquestring(resourceGroup().id))]",
       "serviceBusQueue": "[parameters('serviceBusQueueName')]",
       "serviceBusNamespace": "[parameters('serviceBusNamespaceName')]",
       "runtime": "[parameters('linuxFxVersion')]",
@@ -80,7 +80,7 @@
     },
     "resources": [
       {
-        "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
+        // "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "name": "[variables('storageAccountName')]",
@@ -94,7 +94,7 @@
         }
       },
       {
-        "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2018-02-01",
         "name": "[variables('hostingPlanName')]",
@@ -110,7 +110,7 @@
         }
       },
       {
-        "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/sites",
         "apiVersion": "2018-11-01",
         "name": "[variables('functionAppName')]",
@@ -157,7 +157,7 @@
         }
       },
       {
-        "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
+        // "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
         "type": "microsoft.insights/components",
         "apiVersion": "2018-05-01-preview",
         "name": "[variables('applicationInsightsName')]",
