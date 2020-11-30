@@ -26,12 +26,6 @@
           "description": "Location for all resources."
         }
       },
-      "appInsightsLocation": {
-        "type": "string",
-        "metadata": {
-          "description": "Location for Application Insights"
-        }
-      },
       "linuxFxVersion": {
         "type": "string",
         "metadata": {
@@ -78,15 +72,19 @@
       "hostingPlanName": "[concat('tanujk',parameters('appName'))]",
       "applicationInsightsName": "[concat('tanujk',parameters('appName'))]",
       "storageAccountName": "[concat('tanujk',uniquestring(resourceGroup().id))]",
-      "functionWorkerRuntime": "[concat('tanujk',parameters('linuxFxVersion'))]"
+      "functionWorkerRuntime": "[concat('tanujk',parameters('linuxFxVersion'))]",
+      "serviceBusQueue": "[parameters('serviceBusQueueName')]",
+      "serviceBusNamespace": "[parameters('serviceBusNamespaceName')]",
+      "runtime": "[parameters('linuxFxVersion')]",
+      "locaiton": "[parameters('location')]"
     },
     "resources": [
       {
-        // "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
+        "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "name": "[variables('storageAccountName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('locaiton')]",
         "sku": {
           "name": "[parameters('storageAccountType')]"
         },
@@ -96,11 +94,11 @@
         }
       },
       {
-        // "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2018-02-01",
         "name": "[variables('hostingPlanName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('locaiton')]",
         "kind": "linux",
         "sku": {
           "name": "[parameters('skuCode')]",
@@ -112,11 +110,11 @@
         }
       },
       {
-        // "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
         "type": "Microsoft.Web/sites",
         "apiVersion": "2018-11-01",
         "name": "[variables('functionAppName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('locaiton')]",
         "kind": "functionapp,linux",
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
@@ -153,17 +151,17 @@
               }
             ],
             "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
-            "linuxFxVersion": "[parameters('linuxFxVersion')]",
+            "linuxFxVersion": "[variables('runtime')]",
             "alwaysOn": true
           }
         }
       },
       {
-        // "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
         "type": "microsoft.insights/components",
         "apiVersion": "2018-05-01-preview",
         "name": "[variables('applicationInsightsName')]",
-        "location": "[parameters('appInsightsLocation')]",
+        "location": "[variables('locaiton')]",
         "properties": {
           "Application_Type": "web",
           "ApplicationId": "[variables('applicationInsightsName')]",
@@ -172,9 +170,9 @@
       },
       {
       "apiVersion": "2018-01-01-preview",
-      "name": "[parameters('serviceBusNamespaceName')]",
+      "name": "[variables('serviceBusNamespace')]",
       "type": "Microsoft.ServiceBus/namespaces",
-      "location": "[parameters('location')]",
+      "location": "[variables('locaiton')]",
       "sku": {
         "name": "[parameters('serviceBusSku')]"
       },
@@ -183,9 +181,9 @@
         {
           "type": "Queues",
           "apiVersion": "2017-04-01",
-          "name": "[parameters('serviceBusQueueName')]",
+          "name": "[variables('serviceBusQueue')]",
           "dependsOn": [
-            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusNamespaceName'))]"
+            "[resourceId('Microsoft.ServiceBus/namespaces',variables('serviceBusNamespace'))]"
           ],
           "properties": {
             "lockDuration": "PT5M",

@@ -11,9 +11,6 @@
         "location": {
             "value": "uksouth" 
         },
-        "appInsightsLocation": {
-            "value": "uksouth" 
-        },
         "linuxFxVersion": {
             "value": "Node|10"
         },
