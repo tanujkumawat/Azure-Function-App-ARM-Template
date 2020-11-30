@@ -80,7 +80,7 @@
     },
     "resources": [
       {
-        // "condition": "[not(equals(variables('storageAccountName'),'tanujk2blmqtbu3sch6'))]",
+        "condition": "[not(equals(variables('storageAccountName'),'quesn2blmqtbu3sch6'))]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "name": "[variables('storageAccountName')]",
@@ -94,7 +94,7 @@
         }
       },
       {
-        // "condition": "[not(equals(variables('hostingPlanName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('hostingPlanName'),'quesn2blmqtbu3sch6'))]",
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2018-02-01",
         "name": "[variables('hostingPlanName')]",
@@ -110,7 +110,7 @@
         }
       },
       {
-        // "condition": "[not(equals(variables('functionAppName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('functionAppName'),'quesn2blmqtbu3sch6'))]",
         "type": "Microsoft.Web/sites",
         "apiVersion": "2018-11-01",
         "name": "[variables('functionAppName')]",
@@ -157,7 +157,7 @@
         }
       },
       {
-        // "condition": "[not(equals(variables('applicationInsightsName'),'tanujkfuncApp'))]",
+        "condition": "[not(equals(variables('applicationInsightsName'),'quesn2blmqtbu3sch6'))]",
         "type": "microsoft.insights/components",
         "apiVersion": "2018-05-01-preview",
         "name": "[variables('applicationInsightsName')]",

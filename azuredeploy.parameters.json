@@ -21,7 +21,7 @@
             "value": "Standard"
         },
         "serviceBusQueueName": {
-            "value": "questionnaire" 
+            "value": "questionnair" 
         },
         "sku": {
             "value": "Basic"
